@@ -1,0 +1,65 @@
+version: "2"
+
+services:
+  # index, search & agregation
+  elasticsearch:
+    image: elasticsearch
+    container_name: elastic
+    environment:
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - $PWD/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - "es-data:/usr/share/elasticsearch/data"
+    networks:
+      - logging
+  # UI
+  kibana:
+    image: kibana
+    container_name: kibana
+    ports:
+      - 5601:5601
+    volumes:
+      - $PWD/kibana/config/kibana.yml:/etc/kibana/kibana.yml
+    networks:
+      - logging
+    depends_on:
+      - elasticsearch
+  # indexer
+  logstash:
+    image: logstash
+    container_name: logstash
+    command: logstash -f /config/
+    environment:
+      - JAVA_OPTS=-Xms1g -Xmx1g
+    ports:
+     - 8085:8085
+    volumes:
+      - $PWD/logstash/config:/config
+    networks:
+      - logging
+    depends_on:
+      - elasticsearch
+      
+  apmserver:
+    image: docker.elastic.co/apm/apm-server:6.2.4
+    container_name: apmserver
+    ports:
+     - 8200:8200
+    volumes:
+      - $PWD/apmserver/config/apm-server.yml:/usr/share/apm-server/apm-server.yml
+    networks:
+      - logging
+    depends_on:
+      - elasticsearch
+      - kibana
+
+volumes:
+  es-data:
+    driver: local
+    
+networks:
+  logging:
+    driver: bridge
