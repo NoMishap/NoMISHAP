@@ -1,6 +1,7 @@
 version: "2"
 
 services:
+
   # index, search & agregation
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
@@ -15,6 +16,7 @@ services:
       - "es-data:/usr/share/elasticsearch/data"
     networks:
       - logging
+      
   # UI
   kibana:
     image: docker.elastic.co/kibana/kibana:6.2.4
@@ -27,9 +29,10 @@ services:
       - logging
     depends_on:
       - elasticsearch
+      
   # indexer
   logstash:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
+    image: docker.elastic.co/logstash/logstash:6.2.4
     container_name: logstash
     command: logstash -f /config/
     environment:
@@ -48,13 +51,20 @@ services:
     container_name: apmserver
     ports:
      - 8200:8200
-     - 5602:5601
     volumes:
       - $PWD/apmserver/config/apm-server.yml:/usr/share/apm-server/apm-server.yml
     networks:
       - logging
     depends_on:
       - elasticsearch
+      
+  webapp:
+    build: /home/andrea/Documents/imola/NoMISHAP/PaaSProxies/OpenShiftProxyNodejs/
+    container_name: webapp
+    ports:
+        - 8080:8080
+    networks: 
+        - logging
 
 volumes:
   es-data:

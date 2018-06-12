@@ -1,12 +1,14 @@
 apm-server:
-  host: localhost:8200
-
+  host: apmserver:8200
+  ssl.enabled: false
+  
 output:
   elasticsearch:
-    hosts: elasticsearch:9200 
+    hosts: elasticsearch:9200
+    ssl.enabled: false
 
 #output.elasticsearch:
  # index: "apm-%{[app.name]}-%{[beat.version]}-%{+yyyy.MM.dd}"
   
-setup.kibana:
-  host: "localhost:5601"
+#setup.kibana:
+  #host: "localhost:5601"
