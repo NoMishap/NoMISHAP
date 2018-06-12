@@ -3,7 +3,7 @@ version: "2"
 services:
   # index, search & agregation
   elasticsearch:
-    image: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
     container_name: elastic
     environment:
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
@@ -17,7 +17,7 @@ services:
       - logging
   # UI
   kibana:
-    image: kibana
+    image: docker.elastic.co/kibana/kibana:6.2.4
     container_name: kibana
     ports:
       - 5601:5601
@@ -29,7 +29,7 @@ services:
       - elasticsearch
   # indexer
   logstash:
-    image: logstash
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
     container_name: logstash
     command: logstash -f /config/
     environment:
@@ -48,13 +48,13 @@ services:
     container_name: apmserver
     ports:
      - 8200:8200
+     - 5602:5601
     volumes:
       - $PWD/apmserver/config/apm-server.yml:/usr/share/apm-server/apm-server.yml
     networks:
       - logging
     depends_on:
       - elasticsearch
-      - kibana
 
 volumes:
   es-data:

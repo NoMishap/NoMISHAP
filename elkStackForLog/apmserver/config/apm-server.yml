@@ -4,6 +4,9 @@ apm-server:
 output:
   elasticsearch:
     hosts: elasticsearch:9200 
-    
+
+#output.elasticsearch:
+ # index: "apm-%{[app.name]}-%{[beat.version]}-%{+yyyy.MM.dd}"
+  
 setup.kibana:
-  host: "kibana:5601"
+  host: "localhost:5601"
