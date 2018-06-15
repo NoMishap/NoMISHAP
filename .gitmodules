@@ -1,3 +1,12 @@
 [submodule "PDFconvertService"]
 	path = PDFconvertService
 	url = git@github.com:sabbio93/PDFconvertService.git
+[submodule "PaaSProxies/OpenShiftProxy"]
+	path = PaaSProxies/OpenShiftProxy
+	url = git@github.com:sabbio93/OpenShiftProxy.git
+[submodule "PaaSProxies/HerokuProxy"]
+	path = PaaSProxies/HerokuProxy
+	url = git@github.com:sabbio93/HerokuProxy.git
+[submodule "PaaSProxies/BluemixProxy"]
+	path = PaaSProxies/BluemixProxy
+	url = git@github.com:sabbio93/BluemixProxy.git
