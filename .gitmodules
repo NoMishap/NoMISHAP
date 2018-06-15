@@ -1,0 +1,3 @@
+[submodule "PDFconvertService"]
+	path = PDFconvertService
+	url = git@github.com:sabbio93/PDFconvertService.git
