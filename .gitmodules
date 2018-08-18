@@ -10,3 +10,6 @@
 [submodule "PaaSProxies/BluemixProxy"]
 	path = PaaSProxies/BluemixProxy
 	url = git@github.com:sabbio93/BluemixProxy.git
+[submodule "ConsulNoMishap"]
+	path = ConsulNoMishap
+	url = git@github.com:sabbio93/ConsulNoMishap.git
