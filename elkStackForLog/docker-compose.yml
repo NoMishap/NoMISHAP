@@ -60,7 +60,7 @@ services:
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
-     - 8085:8081
+     - 8085:8085
     volumes:
       - $PWD/logstash/config:/config
     networks:
