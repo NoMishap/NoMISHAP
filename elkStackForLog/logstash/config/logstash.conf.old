@@ -1,0 +1,27 @@
+input {
+	http {}
+}
+
+filter {
+    kv{}
+    mutate {
+	   convert => [ "cpuAvgLoad", "integer"]
+	   convert => [ "freeMem", "integer"]
+	   convert => [ "netLoadRx", "integer"]
+	   convert => [ "totalMem", "integer"]
+	   convert => [ "loadAvg5min", "integer"]
+	   convert => [ "availableMem", "integer"]
+	   convert => [ "ncpu", "integer"]
+	   convert => [ "netLoadTx", "integer"]
+	   convert => [ "loadAvg1min", "integer"]
+	   convert => [ "loadAvg15min", "integer"]
+	   convert => [ "cpuLoad", "integer"]
+	   convert => [ "usedMem", "integer"]
+		 }
+    }
+
+output {
+	elasticsearch {
+		hosts => ["elasticsearch:9200"]
+	}
+}
